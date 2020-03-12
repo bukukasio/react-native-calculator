@@ -154,7 +154,6 @@ export class Calculator extends React.Component<CalculatorProps, State> {
   renderMain() {
     const { text, btnSize } = this.state
     const {
-      decimalSeparator,
       calcButtonBackgroundColor,
       calcButtonColor,
       acceptButtonBackgroundColor,
