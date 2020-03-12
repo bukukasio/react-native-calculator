@@ -18,7 +18,8 @@ enum ActionEnum {
   BACK,
   MINUS,
   PLUS,
-  ENTER
+  ENTER,
+  MODULUS
 }
 
 enum StackKindEnum {
@@ -211,7 +212,7 @@ export class Calculator extends React.Component<CalculatorProps, State> {
           {this.renderActionButton(btnSize, 'C', ActionEnum.CLEAR, true)}
           {this.renderActionButton(btnSize, '/', ActionEnum.DIVIDE)}
           {this.renderActionButton(btnSize, '*', ActionEnum.MULTIPLY)}
-          {this.renderActionButton(btnSize, '❮', ActionEnum.BACK)}
+          {this.renderActionButton(btnSize, '%', ActionEnum.MODULUS)}
         </View>
         <View style={Styles.row}>
           {this.renderNumberButton(btnSize, '7', true)}
@@ -238,13 +239,12 @@ export class Calculator extends React.Component<CalculatorProps, State> {
                 {this.renderNumberButton(btnSize, '000', false, 2)}
               </View>
             ) : (
-              <View style={Styles.row}>
-                {this.renderNumberButton(btnSize, '0', true)}
-                {this.renderNumberButton(btnSize, '000')}
-                {!noDecimal &&
-                  this.renderNumberButton(btnSize, decimalSeparator as string)}
-              </View>
-            )}
+                <View style={Styles.row}>
+                  {this.renderNumberButton(btnSize, '0', true)}
+                  {this.renderNumberButton(btnSize, '000')}
+                  {this.renderActionButton(btnSize, '❮', ActionEnum.BACK)}
+                </View>
+              )}
           </View>
           <Button
             style={[
@@ -378,7 +378,8 @@ export class Calculator extends React.Component<CalculatorProps, State> {
       actionButtonBackgroundColor,
       actionButtonColor,
       borderColor,
-      fontSize
+      fontSize,
+      numericButtonBackgroundColor
     } = this.props
 
     return (
@@ -387,7 +388,7 @@ export class Calculator extends React.Component<CalculatorProps, State> {
           Styles.square,
           {
             borderColor,
-            backgroundColor: actionButtonBackgroundColor,
+            backgroundColor: value === '❮' ? numericButtonBackgroundColor : actionButtonBackgroundColor,
             borderLeftWidth: mostLeft ? 1 : 0,
             width: btnSize.width,
             height: btnSize.height
@@ -421,6 +422,10 @@ export class Calculator extends React.Component<CalculatorProps, State> {
 
             case ActionEnum.DIVIDE:
               this.setSign('/')
+              break
+
+            case ActionEnum.MODULUS:
+              this.setSign('%')
               break
 
             case ActionEnum.BACK:
