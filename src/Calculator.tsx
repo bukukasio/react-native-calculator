@@ -529,15 +529,21 @@ export class Calculator extends React.Component<CalculatorProps, State> {
 
     this.stacks.forEach((x, index) => {
       if (x.value === '%') {
-        if (lastOperatorIndex > 0) {
-          const prevResult = eval(expression.substring(0, lastOperatorIndex) || '1')
-          expression = `${prevResult}${this.stacks[lastOperatorIndex].value}${prevResult}*${this.stacks.slice(lastOperatorIndex, index).map(e=>e.value).join('')}*0.01*`
+        const lastOperator = lastOperatorIndex > 0 && this.stacks[lastOperatorIndex].value
+        const pendingExp = lastOperatorIndex ? `(${this.stacks.slice(lastOperatorIndex + 1, index).map(e => e.value).join('')}*0.01)*` : '0'
+        const prevResult = eval(expression.substring(0, lastOperatorIndex) || '1')
+
+        if (lastOperator === '+' || lastOperator === '-') {
+          expression = `${prevResult}${lastOperator}${prevResult}*${pendingExp}`
+        } else if (lastOperator) {
+          expression = `${prevResult}${lastOperator}${pendingExp}`
         } else {
-          expression = `${expression}*0.01*`
+          expression = `(${expression}*0.01)*`
         }
       } else {
         expression += x.value
       }
+
       if (x.kind === StackKindEnum.SIGN) {
         lastOperatorIndex = index
       }
