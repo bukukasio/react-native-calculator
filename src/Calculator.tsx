@@ -509,7 +509,16 @@ export class Calculator extends React.Component<CalculatorProps, State> {
     const stack = this.stacks[this.stacks.length - 1]
 
     if (stack.kind === StackKindEnum.SIGN) {
-      this.popStack()
+      if (stack.value === '%') {
+        this.stacks.push({
+          kind: StackKindEnum.NUMBER,
+          value: '1',
+          text: '1',
+          trailing: ''
+        })
+      } else {
+        this.popStack()
+      }
     } else if (this.stacks.length === 1 && stack.value === '-') {
       this.clear()
       return
