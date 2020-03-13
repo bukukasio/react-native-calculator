@@ -525,12 +525,21 @@ export class Calculator extends React.Component<CalculatorProps, State> {
     }
 
     let expression = ''
+    let lastOperatorIndex = 0
 
-    this.stacks.forEach((x) => {
+    this.stacks.forEach((x, index) => {
       if (x.value === '%') {
-        expression = `(${expression})*0.01*`
+        if (lastOperatorIndex > 0) {
+          const prevResult = eval(expression.substring(0, lastOperatorIndex) || '1')
+          expression = `${prevResult}${this.stacks[lastOperatorIndex].value}${prevResult}*${this.stacks.slice(lastOperatorIndex, index).map(e=>e.value).join('')}*0.01*`
+        } else {
+          expression = `${expression}*0.01*`
+        }
       } else {
         expression += x.value
+      }
+      if (x.kind === StackKindEnum.SIGN) {
+        lastOperatorIndex = index
       }
     })
     // tslint:disable-next-line:no-eval
