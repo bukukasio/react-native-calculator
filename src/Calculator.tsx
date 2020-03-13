@@ -516,7 +516,13 @@ export class Calculator extends React.Component<CalculatorProps, State> {
     }
 
     // tslint:disable-next-line:no-eval
-    const num = eval(this.stacks.map(x => x.value).join('') || '0')
+    const num = eval(this.stacks.map(x => {
+      if (x.value === '%') {
+        return '/100*'
+      }
+
+      return x.value
+    }).join('') || '0')
     const value = Math.round(num * 10 ** roundTo) / 10 ** roundTo
     const text = this.format(value)
 
