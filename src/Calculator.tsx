@@ -19,7 +19,7 @@ enum ActionEnum {
   MINUS,
   PLUS,
   ENTER,
-  MODULUS
+  PERCENTAGE
 }
 
 enum StackKindEnum {
@@ -211,7 +211,7 @@ export class Calculator extends React.Component<CalculatorProps, State> {
           {this.renderActionButton(btnSize, 'C', ActionEnum.CLEAR, true)}
           {this.renderActionButton(btnSize, '/', ActionEnum.DIVIDE)}
           {this.renderActionButton(btnSize, '*', ActionEnum.MULTIPLY)}
-          {this.renderActionButton(btnSize, '%', ActionEnum.MODULUS)}
+          {this.renderActionButton(btnSize, '%', ActionEnum.PERCENTAGE)}
         </View>
         <View style={Styles.row}>
           {this.renderNumberButton(btnSize, '7', true)}
@@ -423,7 +423,7 @@ export class Calculator extends React.Component<CalculatorProps, State> {
               this.setSign('/')
               break
 
-            case ActionEnum.MODULUS:
+            case ActionEnum.PERCENTAGE:
               this.setSign('%')
               break
 
