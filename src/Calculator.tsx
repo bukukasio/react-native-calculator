@@ -533,10 +533,10 @@ export class Calculator extends React.Component<CalculatorProps, State> {
         const pendingExp = lastOperatorIndex ? `(${this.stacks.slice(lastOperatorIndex + 1, index).map(e => e.value).join('')}*0.01))*` : '0'
         const prevResult = eval(this.stacks.slice(0, lastOperatorIndex).map(e => e.value).join('').replace('%', '*') || '1')
 
-        if (lastOperator === '+' || lastOperator === '-' || lastOperator === '/') {
+        if (lastOperator === '+' || lastOperator === '-') {
           expression = `${prevResult}${lastOperator}(${prevResult}*${pendingExp}`
-        } else if (lastOperator) {
-          expression = `(${prevResult}*${pendingExp}`
+        } else if (lastOperator === '*' || lastOperator === '/') {
+          expression = `(${prevResult}${lastOperator}${pendingExp}`
         } else {
           expression = `(${expression}*0.01)*`
         }
