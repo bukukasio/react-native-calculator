@@ -166,8 +166,7 @@ export class Calculator extends React.Component<CalculatorProps, State> {
       width,
       hasAcceptButton,
       hideDisplay,
-      displayTextAlign,
-      noDecimal
+      displayTextAlign
     } = this.props
 
     const done = this.state.done && hasAcceptButton
