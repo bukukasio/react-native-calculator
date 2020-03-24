@@ -249,7 +249,7 @@ export class Calculator extends React.Component<CalculatorProps, State> {
             ]}
             textStyle={{
               color: done ? acceptButtonColor : calcButtonColor,
-              fontSize: fontSize as number
+              fontSize: (fontSize as number) * 2
             }}
             text={done ? '↲' : '='}
             onPress={this.calculate}
@@ -408,8 +408,7 @@ export class Calculator extends React.Component<CalculatorProps, State> {
       actionButtonBackgroundColor,
       actionButtonColor,
       borderColor,
-      fontSize,
-      numericButtonBackgroundColor
+      fontSize
     } = this.props
 
     return (
@@ -418,7 +417,7 @@ export class Calculator extends React.Component<CalculatorProps, State> {
           Styles.square,
           {
             borderColor,
-            backgroundColor: value === '❮' ? numericButtonBackgroundColor : actionButtonBackgroundColor,
+            backgroundColor: actionButtonBackgroundColor,
             borderLeftWidth: mostLeft ? 1 : 0,
             width: btnSize.width,
             height: btnSize.height
