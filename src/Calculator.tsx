@@ -49,6 +49,11 @@ export interface CalculatorProps extends CalculatorCommonProps {
   onAccept?: (value: number, text: string) => void
 
   /**
+   * Plus button click event.
+   */
+  onPressPlus?: () => void
+
+  /**
    * Hide display text field.
    */
   hideDisplay?: boolean
@@ -408,7 +413,8 @@ export class Calculator extends React.Component<CalculatorProps, State> {
       actionButtonBackgroundColor,
       actionButtonColor,
       borderColor,
-      fontSize
+      fontSize,
+      onPressPlus
     } = this.props
 
     return (
@@ -438,7 +444,9 @@ export class Calculator extends React.Component<CalculatorProps, State> {
               break
 
             case ActionEnum.PLUS:
+              if(onPressPlus) onPressPlus()
               this.setSign('+')
+
               break
 
             case ActionEnum.MINUS:
