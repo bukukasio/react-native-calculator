@@ -49,6 +49,11 @@ export interface CalculatorProps extends CalculatorCommonProps {
   onAccept?: (value: number, text: string) => void
 
   /**
+   * Plus button click event.
+   */
+  onPressPlus?: () => void
+
+  /**
    * Hide display text field.
    */
   hideDisplay?: boolean
@@ -158,6 +163,7 @@ export class Calculator extends React.Component<CalculatorProps, State> {
       calcButtonColor,
       acceptButtonBackgroundColor,
       acceptButtonColor,
+      decimalSeparator,
       displayBackgroundColor,
       displayColor,
       borderColor,
@@ -165,8 +171,7 @@ export class Calculator extends React.Component<CalculatorProps, State> {
       width,
       hasAcceptButton,
       hideDisplay,
-      displayTextAlign,
-      noDecimal
+      displayTextAlign
     } = this.props
 
     const done = this.state.done && hasAcceptButton
@@ -209,23 +214,53 @@ export class Calculator extends React.Component<CalculatorProps, State> {
           ]}
         >
           {this.renderActionButton(btnSize, 'C', ActionEnum.CLEAR, true)}
-          {this.renderActionButton(btnSize, '/', ActionEnum.DIVIDE)}
-          {this.renderActionButton(btnSize, '*', ActionEnum.MULTIPLY)}
+          {this.renderActionButton(btnSize, '❮', ActionEnum.BACK)}
           {this.renderActionButton(btnSize, '%', ActionEnum.PERCENTAGE)}
+          {this.renderActionButton(btnSize, '/', ActionEnum.DIVIDE)}
         </View>
         <View style={Styles.row}>
           {this.renderNumberButton(btnSize, '7', true)}
           {this.renderNumberButton(btnSize, '8')}
           {this.renderNumberButton(btnSize, '9')}
-          {this.renderActionButton(btnSize, '-', ActionEnum.MINUS)}
+          {this.renderActionButton(btnSize, '*', ActionEnum.MULTIPLY)}
         </View>
         <View style={Styles.row}>
           {this.renderNumberButton(btnSize, '4', true)}
           {this.renderNumberButton(btnSize, '5')}
           {this.renderNumberButton(btnSize, '6')}
+          {this.renderActionButton(btnSize, '-', ActionEnum.MINUS)}
+        </View>
+        <View style={Styles.row}>
+          {this.renderNumberButton(btnSize, '1', true)}
+          {this.renderNumberButton(btnSize, '2')}
+          {this.renderNumberButton(btnSize, '3')}
           {this.renderActionButton(btnSize, '+', ActionEnum.PLUS)}
         </View>
         <View style={Styles.row}>
+          {this.renderNumberButton(btnSize, '0', true)}
+          {this.renderNumberButton(btnSize, '000')}
+          {this.renderNumberButton(btnSize, decimalSeparator as string)}
+          <Button
+            style={[
+              Styles.square,
+              {
+                borderColor,
+                height: btnSize.height,
+                backgroundColor: done
+                  ? acceptButtonBackgroundColor
+                  : calcButtonBackgroundColor,
+                width: btnSize.width
+              }
+            ]}
+            textStyle={{
+              color: done ? acceptButtonColor : calcButtonColor,
+              fontSize: (fontSize as number) * 2
+            }}
+            text={done ? '↲' : '='}
+            onPress={this.calculate}
+          />
+        </View>
+        {/* <View style={Styles.row}>
           <View style={{}}>
             <View style={Styles.row}>
               {this.renderNumberButton(btnSize, '1', true)}
@@ -241,6 +276,7 @@ export class Calculator extends React.Component<CalculatorProps, State> {
                 <View style={Styles.row}>
                   {this.renderNumberButton(btnSize, '0', true)}
                   {this.renderNumberButton(btnSize, '000')}
+                  {this.renderNumberButton(btnSize, decimalSeparator as string)}
                   {this.renderActionButton(btnSize, '❮', ActionEnum.BACK)}
                 </View>
               )}
@@ -264,7 +300,7 @@ export class Calculator extends React.Component<CalculatorProps, State> {
             text={done ? '↲' : '='}
             onPress={this.calculate}
           />
-        </View>
+        </View> */}
       </View>
     )
   }
@@ -378,7 +414,7 @@ export class Calculator extends React.Component<CalculatorProps, State> {
       actionButtonColor,
       borderColor,
       fontSize,
-      numericButtonBackgroundColor
+      onPressPlus
     } = this.props
 
     return (
@@ -387,7 +423,7 @@ export class Calculator extends React.Component<CalculatorProps, State> {
           Styles.square,
           {
             borderColor,
-            backgroundColor: value === '❮' ? numericButtonBackgroundColor : actionButtonBackgroundColor,
+            backgroundColor: actionButtonBackgroundColor,
             borderLeftWidth: mostLeft ? 1 : 0,
             width: btnSize.width,
             height: btnSize.height
@@ -408,7 +444,9 @@ export class Calculator extends React.Component<CalculatorProps, State> {
               break
 
             case ActionEnum.PLUS:
+              if(onPressPlus) onPressPlus()
               this.setSign('+')
+
               break
 
             case ActionEnum.MINUS:
