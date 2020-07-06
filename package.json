@@ -88,5 +88,8 @@
   "prettier": {
     "semi": false,
     "singleQuote": true
+  },
+  "dependencies": {
+    "copyfiles": "^2.3.0"
   }
 }

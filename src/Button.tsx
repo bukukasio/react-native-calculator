@@ -24,31 +24,31 @@ export class Button extends React.Component<ButtonProps> {
     let icon = null
     switch (text) {
       case 'C':
-        icon = require('../src/assets/icons/clear.png')
+        icon = require('./assets/icons/clear.png')
         break;
       case '❮':
-        icon = require('../src/assets/icons/deletion.png')
+        icon = require('./assets/icons/deletion.png')
         break;
       case '%':
-        icon = require('../src/assets/icons/percentage.png')
+        icon = require('./assets/icons/percentage.png')
         break;
       case '/':
-        icon = require('../src/assets/icons/division.png')
+        icon = require('./assets/icons/division.png')
         break;
       case '*':
-        icon = require('../src/assets/icons/multiplication.png')
+        icon = require('./assets/icons/multiplication.png')
         break;
       case '-':
-        icon = require('../src/assets/icons/substraction.png')
+        icon = require('./assets/icons/substraction.png')
         break;
       case '+':
-        icon = require('../src/assets/icons/addition.png')
+        icon = require('./assets/icons/addition.png')
         break;
       case '↲':
-        icon = require('../src/assets/icons/submit.png')
+        icon = require('./assets/icons/submit.png')
         break;
       case '↲':
-        icon = require('../src/assets/icons/submit.png')
+        icon = require('./assets/icons/submit.png')
         break;
     }
 
