@@ -17,7 +17,7 @@
     "prepare": "npm run build",
     "lint": "tslint 'src/**/*.ts{,x}'",
     "test": "npm run lint && jest",
-    "compile": "tsc -d --declarationDir ./typings && copyfiles -f ./src/assets/icons/* ./dist/assets/icons",
+    "compile": "tsc -d --declarationDir ./typings && cp -r ./src/assets ./dist",
     "build": "rm -rf dist && rm -rf typings && npm run compile && prettier ./typings/**/*.d.ts --write"
   },
   "keywords": [
@@ -88,8 +88,5 @@
   "prettier": {
     "semi": false,
     "singleQuote": true
-  },
-  "dependencies": {
-    "copyfiles": "^2.3.0"
   }
 }
