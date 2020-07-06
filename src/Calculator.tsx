@@ -419,10 +419,11 @@ export class Calculator extends React.Component<CalculatorProps, State> {
 
     return (
       <Button
+        actionButton
         style={[
           Styles.square,
           {
-            borderColor:'#FFFFFF',
+            borderColor: '#FFFFFF',
             backgroundColor: actionButtonBackgroundColor,
             borderLeftWidth: mostLeft ? 1 : 0,
             width: btnSize.width,
@@ -444,7 +445,7 @@ export class Calculator extends React.Component<CalculatorProps, State> {
               break
 
             case ActionEnum.PLUS:
-              if(onPressPlus) onPressPlus()
+              if (onPressPlus) onPressPlus()
               this.setSign('+')
 
               break
