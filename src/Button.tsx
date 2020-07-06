@@ -8,11 +8,13 @@ import {
   TouchableOpacity,
   View,
   ViewStyle,
-  Image
+  Image,
+  ImageStyle
 } from 'react-native'
 
 export interface ButtonProps {
   actionButton?: boolean
+  iconStyle?: StyleProp<ImageStyle>
   style?: StyleProp<ViewStyle>
   textStyle?: StyleProp<TextStyle>
   text?: string
@@ -53,7 +55,7 @@ export class Button extends React.Component<ButtonProps> {
     }
 
     return (
-      <Image resizeMode="contain" source={icon}/>
+      <Image resizeMode="contain" source={icon} style={this.props.iconStyle} />
     )
 
   }
