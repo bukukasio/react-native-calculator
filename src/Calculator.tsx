@@ -315,7 +315,7 @@ export class Calculator extends React.Component<CalculatorProps, State> {
       decimalSeparator,
       numericButtonBackgroundColor,
       numericButtonColor,
-      borderColor,
+      borderColor="#ECEFF0",
       fontSize
     } = this.props
 
@@ -412,7 +412,7 @@ export class Calculator extends React.Component<CalculatorProps, State> {
     const {
       actionButtonBackgroundColor,
       actionButtonColor,
-      borderColor,
+      borderColor= "#FFFFFF",
       fontSize,
       onPressPlus
     } = this.props
@@ -696,7 +696,7 @@ export class Calculator extends React.Component<CalculatorProps, State> {
 const Styles = StyleSheet.create({
   displayContainer: {
     borderStyle: 'solid',
-    borderWidth: 1,
+    // borderWidth: 1,
     paddingLeft: 10,
     paddingRight: 10,
     paddingBottom: 0,
