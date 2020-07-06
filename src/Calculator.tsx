@@ -214,9 +214,9 @@ export class Calculator extends React.Component<CalculatorProps, State> {
           ]}
         >
           {this.renderActionButton(btnSize, 'C', ActionEnum.CLEAR, true)}
-          {this.renderActionButton(btnSize, '❮', ActionEnum.BACK)}
-          {this.renderActionButton(btnSize, '%', ActionEnum.PERCENTAGE)}
           {this.renderActionButton(btnSize, '/', ActionEnum.DIVIDE)}
+          {this.renderActionButton(btnSize, '%', ActionEnum.PERCENTAGE)}
+          {this.renderActionButton(btnSize, '❮', ActionEnum.BACK)}
         </View>
         <View style={Styles.row}>
           {this.renderNumberButton(btnSize, '7', true)}
