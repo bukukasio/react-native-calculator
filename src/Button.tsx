@@ -53,7 +53,7 @@ export class Button extends React.Component<ButtonProps> {
     }
 
     return (
-      <Image source={icon} />
+      <Image resizeMode="contain" source={icon} style={{width:20}}/>
     )
 
   }
