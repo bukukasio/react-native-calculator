@@ -209,7 +209,7 @@ export class Calculator extends React.Component<CalculatorProps, State> {
           style={[
             Styles.row,
             hideDisplay
-              ? { borderTopWidth: 1, borderTopColor: borderColor }
+              ? { borderTopWidth: 1, borderTopColor: '#FFF' }
               : undefined
           ]}
         >
@@ -244,7 +244,7 @@ export class Calculator extends React.Component<CalculatorProps, State> {
             style={[
               Styles.square,
               {
-                borderColor,
+                borderColor: "#ECEFF0",
                 height: btnSize.height,
                 backgroundColor: done
                   ? acceptButtonBackgroundColor
@@ -315,7 +315,7 @@ export class Calculator extends React.Component<CalculatorProps, State> {
       decimalSeparator,
       numericButtonBackgroundColor,
       numericButtonColor,
-      borderColor="#ECEFF0",
+      // borderColor,
       fontSize
     } = this.props
 
@@ -324,7 +324,7 @@ export class Calculator extends React.Component<CalculatorProps, State> {
         style={[
           Styles.square,
           {
-            borderColor,
+            borderColor: "#ECEFF0",
             backgroundColor: numericButtonBackgroundColor,
             borderLeftWidth: mostLeft ? 1 : 0,
             width: btnSize.width * scaleX,
@@ -412,7 +412,7 @@ export class Calculator extends React.Component<CalculatorProps, State> {
     const {
       actionButtonBackgroundColor,
       actionButtonColor,
-      borderColor= "#FFFFFF",
+      // borderColor,
       fontSize,
       onPressPlus
     } = this.props
@@ -422,7 +422,7 @@ export class Calculator extends React.Component<CalculatorProps, State> {
         style={[
           Styles.square,
           {
-            borderColor,
+            borderColor:'#FFFFFF',
             backgroundColor: actionButtonBackgroundColor,
             borderLeftWidth: mostLeft ? 1 : 0,
             width: btnSize.width,
