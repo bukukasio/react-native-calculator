@@ -241,6 +241,7 @@ export class Calculator extends React.Component<CalculatorProps, State> {
           {this.renderNumberButton(btnSize, '000')}
           {this.renderNumberButton(btnSize, decimalSeparator as string)}
           <Button
+            actionButton
             style={[
               Styles.square,
               {

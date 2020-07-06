@@ -47,7 +47,7 @@ export class Button extends React.Component<ButtonProps> {
       case '↲':
         icon = require('./assets/icons/submit.png')
         break;
-      case '↲':
+      case '=':
         icon = require('./assets/icons/submit.png')
         break;
     }
