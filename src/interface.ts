@@ -97,7 +97,7 @@ export interface CalculatorCommonProps {
   /**
    * Text change event.
    */
-  onTextChange?: (text: string) => void
+  onTextChange?: (value: number, text: string) => void
 
   /**
    * Digit align display.

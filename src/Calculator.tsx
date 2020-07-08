@@ -546,6 +546,72 @@ export class Calculator extends React.Component<CalculatorProps, State> {
     )
   }
 
+  realTimeCalculate() {
+    const { roundTo = 2 } = this.props
+
+    let tempStack = [...this.stacks]
+    if (!tempStack.length) {
+      return 0
+    }
+
+    const stack = tempStack[tempStack.length - 1]
+
+    if (stack.kind === StackKindEnum.SIGN) {
+      if (stack.value === '%') {
+        tempStack.push({
+          kind: StackKindEnum.NUMBER,
+          value: '1',
+          text: '1',
+          trailing: ''
+        })
+      } else {
+        tempStack.pop()
+        if (!tempStack.length) {
+          tempStack = [
+            {
+              kind: StackKindEnum.NUMBER,
+              value: '0',
+              text: this.format(0),
+              trailing: ''
+            }
+          ]
+        }
+      }
+    } else if (tempStack.length === 1 && stack.value === '-') {
+      return 0
+    }
+
+    let expression = ''
+    let lastOperatorIndex = 0
+
+    tempStack.forEach((x, index) => {
+      if (x.value === '%') {
+        const lastOperator = lastOperatorIndex > 0 && tempStack[lastOperatorIndex].value
+        const pendingExp = lastOperatorIndex ? `(${tempStack.slice(lastOperatorIndex + 1, index).map(e => e.value).join('')}*0.01))*` : '0'
+        const prevResult = eval(tempStack.slice(0, lastOperatorIndex).map(e => e.value).join('').replace('%', '*') || '1')
+
+        if (lastOperator === '+' || lastOperator === '-') {
+          expression = `${prevResult}${lastOperator}(${prevResult}*${pendingExp}`
+        } else if (lastOperator === '*' || lastOperator === '/') {
+          expression = `(${prevResult}${lastOperator}${pendingExp}`
+        } else {
+          expression = `(${expression}*0.01)*`
+        }
+      } else {
+        expression += x.value
+      }
+
+      if (x.kind === StackKindEnum.SIGN) {
+        lastOperatorIndex = index
+      }
+    })
+    // tslint:disable-next-line:no-eval
+    const num = eval(expression || '0')
+    const value = Math.round(num * 10 ** roundTo) / 10 ** roundTo
+
+    return value
+  }
+
   calculate() {
     const { onCalc, onAccept, hasAcceptButton, roundTo = 2 } = this.props
 
@@ -684,7 +750,7 @@ export class Calculator extends React.Component<CalculatorProps, State> {
     this.setState({ text, done }, () => {
       const { onTextChange } = this.props
       if (onTextChange) {
-        onTextChange(text)
+        onTextChange(this.realTimeCalculate(), text)
       }
 
       if (callback) {
