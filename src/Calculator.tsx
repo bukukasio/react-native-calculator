@@ -750,11 +750,7 @@ export class Calculator extends React.Component<CalculatorProps, State> {
     this.setState({ text, done }, () => {
       const { onTextChange } = this.props
       if (onTextChange) {
-        if(text.match(/[+|-|/|*|%]/g)){
-          onTextChange(this.realTimeCalculate(), text)
-        } else{
-          onTextChange(+text, text)
-        }
+        onTextChange(this.realTimeCalculate(), text)
       }
 
       if (callback) {
