@@ -81,7 +81,7 @@ export class Button extends React.Component<ButtonProps> {
       case '↲':
         return 'submit'
       case '=':
-        return 'equals'
+        return 'submit'
       default:
         return null
     }
@@ -93,8 +93,8 @@ export class Button extends React.Component<ButtonProps> {
 
     return (
       <TouchableOpacity
-        accessibilityLabel={`${accessibilityLabel}:${accessibilityText}`}
-        testID={`${testID}:${accessibilityText}`}
+        accessibilityLabel={`${accessibilityLabel}:${accessibilityText}:btn`}
+        testID={`${testID}:${accessibilityText}:btn`}
         style={[style]}
         onPressIn={onPress}
       >
