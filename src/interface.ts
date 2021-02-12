@@ -113,6 +113,16 @@ export interface CalculatorCommonProps {
    * How many decimal places to round the value
    */
   roundTo?: number
+
+  /**
+   * Accessibility Android.
+   */
+  accessibilityLabel?: string
+  
+  /**
+   * Accessibility iOS.
+   */
+  testID?: string
 }
 
 export const DefaultCommonProps: Partial<CalculatorCommonProps> = {

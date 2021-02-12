@@ -159,6 +159,8 @@ export class Calculator extends React.Component<CalculatorProps, State> {
   renderMain() {
     const { text, btnSize } = this.state
     const {
+      accessibilityLabel,
+      testID,
       calcButtonBackgroundColor,
       calcButtonColor,
       acceptButtonBackgroundColor,
@@ -241,6 +243,8 @@ export class Calculator extends React.Component<CalculatorProps, State> {
           {this.renderNumberButton(btnSize, '000')}
           {this.renderNumberButton(btnSize, decimalSeparator as string)}
           <Button
+            accessibilityLabel={accessibilityLabel}
+            testID={testID}
             actionButton
             iconStyle={{
               width: btnSize.width,
@@ -317,6 +321,8 @@ export class Calculator extends React.Component<CalculatorProps, State> {
     scaleX: number = 1
   ) {
     const {
+      accessibilityLabel,
+      testID,
       decimalSeparator,
       numericButtonBackgroundColor,
       numericButtonColor,
@@ -326,6 +332,8 @@ export class Calculator extends React.Component<CalculatorProps, State> {
 
     return (
       <Button
+        accessibilityLabel={accessibilityLabel}
+        testID={testID}
         style={[
           Styles.square,
           {
@@ -415,6 +423,8 @@ export class Calculator extends React.Component<CalculatorProps, State> {
     mostLeft: boolean = false
   ) {
     const {
+      accessibilityLabel,
+      testID,
       actionButtonBackgroundColor,
       actionButtonColor,
       // borderColor,
@@ -424,6 +434,8 @@ export class Calculator extends React.Component<CalculatorProps, State> {
 
     return (
       <Button
+        accessibilityLabel={accessibilityLabel}
+        testID={testID}
         actionButton
         iconStyle={{
           width: btnSize.width,
