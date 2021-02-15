@@ -13,6 +13,8 @@ import {
 } from 'react-native'
 
 export interface ButtonProps {
+  accessibilityLabel?: string
+  testID?: string
   actionButton?: boolean
   iconStyle?: StyleProp<ImageStyle>
   style?: StyleProp<ViewStyle>
@@ -60,11 +62,42 @@ export class Button extends React.Component<ButtonProps> {
 
   }
 
+  getAccessibilityText(text: any) {
+    switch (text) {
+      case 'C':
+        return 'clear'
+      case '❮':
+        return 'backspace'
+      case '%':
+        return 'percent'
+      case '/':
+        return 'divide'
+      case '*':
+        return 'multiply'
+      case '-':
+        return 'subtract'
+      case '+':
+        return 'add'
+      case '↲':
+        return 'submit'
+      case '=':
+        return 'submit'
+      default:
+        return null
+    }
+  }
+
   render() {
-    const { actionButton, style, text, textStyle, onPress } = this.props
+    const { accessibilityLabel, testID, actionButton, style, text, textStyle, onPress } = this.props
+    const accessibilityText = actionButton ? this.getAccessibilityText(text) : text
 
     return (
-      <TouchableOpacity style={[style]} onPressIn={onPress}>
+      <TouchableOpacity
+        accessibilityLabel={`${accessibilityLabel}:${accessibilityText}:btn`}
+        testID={`${testID}:${accessibilityText}:btn`}
+        style={[style]}
+        onPressIn={onPress}
+      >
         <View style={styles.container}>
           {actionButton
             ? this.renderButton(text)
